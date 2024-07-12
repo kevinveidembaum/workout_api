@@ -1,21 +1,19 @@
 """init_db
 
-Revision ID: 91fecd8bdda5
+Revision ID: c006e8463eb4
 Revises: 
-Create Date: 2024-07-12 19:26:09.022572
+Create Date: 2023-07-27 19:13:13.567144
 
 """
-from typing import Sequence, Union
-
 from alembic import op
 import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '91fecd8bdda5'
-down_revision: Union[str, None] = None
-branch_labels: Union[str, Sequence[str], None] = None
-depends_on: Union[str, Sequence[str], None] = None
+revision = '91fecd8bdda5'
+down_revision = None
+branch_labels = None
+depends_on = None
 
 
 def upgrade() -> None:
@@ -46,8 +44,10 @@ def upgrade() -> None:
     sa.Column('sexo', sa.String(length=1), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('categoria_id', sa.Integer(), nullable=False),
+    sa.Column('centro_treinamento_id', sa.Integer(), nullable=False),
     sa.Column('id', sa.UUID(), nullable=False),
-    sa.ForeignKeyConstraint(['categoria_id'], ['centros_treinamento.pk_id'], ),
+    sa.ForeignKeyConstraint(['categoria_id'], ['categorias.pk_id'], ),
+    sa.ForeignKeyConstraint(['centro_treinamento_id'], ['centros_treinamento.pk_id'], ),
     sa.PrimaryKeyConstraint('pk_id'),
     sa.UniqueConstraint('cpf')
     )
